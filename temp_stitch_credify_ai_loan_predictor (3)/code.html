@@ -1,0 +1,343 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Loan Prediction - Credify</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&amp;family=Inter:wght@400;500&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#353534",
+                    "background": "#131313",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#574200",
+                    "on-tertiary": "#3e2e00",
+                    "surface-tint": "#e9c349",
+                    "on-secondary-fixed-variant": "#474646",
+                    "primary": "#f2ca50",
+                    "surface": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "error-container": "#93000a",
+                    "surface-bright": "#3a3939",
+                    "inverse-on-surface": "#313030",
+                    "secondary": "#c8c6c5",
+                    "outline-variant": "#4d4635",
+                    "on-primary-fixed-variant": "#574500",
+                    "error": "#ffb4ab",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-error": "#690005",
+                    "on-primary-container": "#554300",
+                    "on-surface-variant": "#d0c5af",
+                    "primary-container": "#d4af37",
+                    "primary-fixed": "#ffe088",
+                    "on-secondary": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "outline": "#99907c",
+                    "on-secondary-container": "#bab8b7",
+                    "on-surface": "#e5e2e1",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-tertiary-fixed": "#251a00",
+                    "on-primary-fixed": "#241a00",
+                    "inverse-primary": "#735c00",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#353534",
+                    "tertiary-fixed-dim": "#f0c03e",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-dim": "#131313",
+                    "tertiary": "#f9c845",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-container": "#4a4949",
+                    "tertiary-container": "#daad2a",
+                    "tertiary-fixed": "#ffdf95",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary": "#3c2f00",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-md": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "stack-lg": "48px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Geist"],
+                    "display-lg-mobile": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "mono-data": ["Geist"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-data": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Form Element Base Styles for Dark Luxury */
+        .form-input-luxury {
+            @apply bg-surface-container-lowest border border-surface-container-high rounded p-3 w-full text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all duration-300;
+        }
+        .form-select-luxury {
+            @apply bg-surface-container-lowest border border-surface-container-high rounded p-3 w-full text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all duration-300 appearance-none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2399907c' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+        .form-select-luxury option {
+            @apply bg-surface-container-lowest text-on-surface;
+        }
+        .form-label-luxury {
+            @apply font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block mb-2;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-container/30 selection:text-primary">
+<!-- TopNavBar -->
+<header class="bg-background/80 backdrop-blur-xl text-primary fixed top-0 w-full z-50 border-b border-outline-variant/30 shadow-[0px_4px_20px_rgba(212,175,55,0.05)]">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-4"><a href="#" class="block"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmpoTVCqDFzk70IYZ_tzohogQZ3UMUoB1wfbb90h102vkg6miHtqXIAdUoEz4N4z-hyPeOT5iXT-ae6y8rnKRsceKFVLUsH9vzTa2ZOXYmosYFuv1rzL5xlEBkMZdQG_urDytqCkwrX-egZRky5gtEP9dioEajIRN-Li_KAzepaRpC7Z_QMBhRxWNDevXQkBuzcc3IP7w1vE7rb2ioxiYM-OW7iTMoyAI9soDi-4nWuu_pehGMXYVo" alt="Credify Premium Logo" class="h-8 w-auto object-contain"></a></div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300 hover:bg-primary/10 hover:text-primary-fixed transition-all px-3 py-2 rounded-md" href="#">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300 hover:bg-primary/10 hover:text-primary-fixed transition-all px-3 py-2 rounded-md" href="#">Predict</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300 hover:bg-primary/10 hover:text-primary-fixed transition-all px-3 py-2 rounded-md" href="#">How It Works</a>
+<!-- Active Navigation: Advisory (Closest match for Predictive tools) -->
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1 px-3 py-2 rounded-md bg-primary/5" href="#">About</a>
+</nav>
+<!-- Trailing Action -->
+<div class="flex items-center gap-4">
+<button class="hidden md:block border border-primary text-primary px-6 py-2 rounded-full font-label-sm text-label-sm hover:bg-primary/10 transition-all duration-300 active:scale-95">Get Started</button>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark metallic security token with subtle gold geometric lines and glowing edges, representing digital identity and luxury. Shot in high-contrast cinematic lighting against an absolute black void." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2qenc3LZa58KkZGenuzDnRoLLoaUzOLIXgmClLm9rhrQFHy_IPdLeWzeLKCdc26Vb4uq0SpsZmdFRh_KjLKhy5v0EvtM-SU5ViLHRVI0_buPQMKcbyBVQ6mB88oL17TPAr222xY76soLfE1pJP_IjSw7rnIm-2AdcsK_J5nd09bXCMLpHqla-WjX4kTk-6LlEO06igsUyfGwRmaunYT6MQ8lHM0XwSnJOvUnH0JWatNJh3k2TtedG">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-stack-lg relative">
+<!-- Ambient Glow Backing -->
+<div class="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-container/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<!-- Page Header -->
+<div class="relative z-10 flex flex-col gap-4 max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/50 w-fit">
+<span class="material-symbols-outlined text-primary text-[14px]">psychology</span>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">AI Predictive Model v2.4</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-primary text-display-lg-mobile md:text-display-lg">Loan Prediction Engine</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Enter your client's data below to run our institutional-grade predictive model. Our algorithms analyze multiple financial and demographic dimensions to output real-time approval probabilities.
+            </p>
+</div>
+<!-- Form Layout (Bento Grid) -->
+<form class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-gutter w-full" id="loanPredictionForm">
+<!-- Section 1: Personal -->
+<div class="bg-surface-dim border border-surface-container-high rounded-xl p-stack-md flex flex-col gap-stack-md hover:border-outline-variant transition-colors duration-300 group">
+<div class="flex items-center gap-3 border-b border-surface-container-high pb-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">person</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Personal Details</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="form-label-luxury">Gender</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="gender">
+<option value="">Select Gender</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+<option value="Other">Other / Non-Binary</option>
+</select>
+</div>
+<div>
+<label class="form-label-luxury">Marital Status</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="married">
+<option value="">Select Status</option>
+<option value="Yes">Married</option>
+<option value="No">Single</option>
+</select>
+</div>
+<div class="sm:col-span-2">
+<label class="form-label-luxury">Dependents</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="dependents">
+<option value="">Select Dependents</option>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3+">3+</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Section 2: Applicant Profile -->
+<div class="bg-surface-dim border border-surface-container-high rounded-xl p-stack-md flex flex-col gap-stack-md hover:border-outline-variant transition-colors duration-300 group">
+<div class="flex items-center gap-3 border-b border-surface-container-high pb-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">school</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Applicant Background</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="sm:col-span-2">
+<label class="form-label-luxury">Education Level</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="education">
+<option value="">Select Education</option>
+<option value="Graduate">Graduate</option>
+<option value="Not Graduate">Not Graduate</option>
+</select>
+</div>
+<div class="sm:col-span-2">
+<label class="form-label-luxury">Employment Status</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="self_employed">
+<option value="">Select Status</option>
+<option value="No">Salaried / Employed</option>
+<option value="Yes">Self Employed</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Section 3: Financial Metrics -->
+<div class="bg-surface-dim border border-surface-container-high rounded-xl p-stack-md flex flex-col gap-stack-md hover:border-outline-variant transition-colors duration-300 group">
+<div class="flex items-center gap-3 border-b border-surface-container-high pb-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">account_balance</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Financial Metrics</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="form-label-luxury">Applicant Income ($)</label>
+<input class="form-input-luxury font-mono-data text-mono-data bg-[#050505] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="applicant_income" placeholder="0.00" type="number">
+</div>
+<div>
+<label class="form-label-luxury">Co-Applicant Income ($)</label>
+<input class="form-input-luxury font-mono-data text-mono-data bg-[#050505] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="coapplicant_income" placeholder="0.00" type="number">
+</div>
+<div>
+<label class="form-label-luxury">Loan Amount ($)</label>
+<input class="form-input-luxury font-mono-data text-mono-data bg-[#050505] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="loan_amount" placeholder="0.00" type="number">
+</div>
+<div>
+<label class="form-label-luxury">Loan Term (Months)</label>
+<input class="form-input-luxury font-mono-data text-mono-data bg-[#050505] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="loan_amount_term" placeholder="360" type="number">
+</div>
+</div>
+</div>
+<!-- Section 4: Credit & Property -->
+<div class="bg-surface-dim border border-surface-container-high rounded-xl p-stack-md flex flex-col gap-stack-md hover:border-outline-variant transition-colors duration-300 group relative overflow-hidden">
+<!-- Subtle internal glow for the credit section -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary-container/10 blur-[50px] rounded-full pointer-events-none"></div>
+<div class="flex items-center gap-3 border-b border-surface-container-high pb-4 relative z-10">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">verified_user</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Credit &amp; Collateral</h2>
+</div>
+<div class="grid grid-cols-1 gap-4 relative z-10">
+<div>
+<label class="form-label-luxury">Credit History</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="credit_history">
+<option value="">Select Credit Standing</option>
+<option value="1">1 - Good / Meets Requirements</option>
+<option value="0">0 - Bad / Fails Requirements</option>
+</select>
+</div>
+<div>
+<label class="form-label-luxury">Property Area</label>
+<select class="form-select-luxury bg-[#121212] text-[#F5F5F0] border-[#2A2A2A] placeholder-[#777770] focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 transition-all duration-300" name="property_area">
+<option value="">Select Location Type</option>
+<option value="Urban">Urban</option>
+<option value="Semiurban">Semi-Urban</option>
+<option value="Rural">Rural</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="md:col-span-2 flex flex-col items-center justify-center pt-8 border-t border-surface-container-high mt-4">
+<button class="relative group overflow-hidden bg-primary-container text-on-primary-container font-headline-md text-body-lg font-bold px-12 py-4 rounded-lg shadow-[0px_4px_20px_rgba(212,175,55,0.05)] hover:shadow-[0px_4px_20px_rgba(212,175,55,0.3)] transition-all duration-300 w-full md:w-auto active:scale-95 flex items-center justify-center gap-3" id="submitBtn" type="submit">
+<div class="absolute inset-0 bg-primary-fixed opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<span class="relative z-10" id="btnText">Predict Loan Approval</span>
+<span class="material-symbols-outlined relative z-10 transition-transform duration-300 group-hover:translate-x-1" id="btnIcon">arrow_forward</span>
+<!-- Loading Spinner (Hidden by default) -->
+<span class="material-symbols-outlined relative z-10 hidden animate-spin" id="loadingSpinner">progress_activity</span>
+</button>
+</div>
+</form>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest text-primary w-full py-stack-lg border-t border-outline-variant/20 mt-auto z-10 relative">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand & Copyright -->
+<div class="flex flex-col gap-4 md:col-span-1">
+<div class="h-10 w-fit"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmpoTVCqDFzk70IYZ_tzohogQZ3UMUoB1wfbb90h102vkg6miHtqXIAdUoEz4N4z-hyPeOT5iXT-ae6y8rnKRsceKFVLUsH9vzTa2ZOXYmosYFuv1rzL5xlEBkMZdQG_urDytqCkwrX-egZRky5gtEP9dioEajIRN-Li_KAzepaRpC7Z_QMBhRxWNDevXQkBuzcc3IP7w1vE7rb2ioxiYM-OW7iTMoyAI9soDi-4nWuu_pehGMXYVo" alt="Credify Premium Logo" class="h-full w-auto object-contain"></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase opacity-70">
+                    © 2024 Credify AI. All rights reserved. Precision Wealth Management.
+                </div>
+</div>
+<!-- Spacer for Grid alignment -->
+<div class="hidden md:block"></div>
+<!-- Links -->
+<div class="md:col-span-2 flex flex-wrap gap-x-8 gap-y-4 justify-start md:justify-end items-center">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Security</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Institutional</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Careers</a>
+</div>
+</div>
+</footer>
+<!-- Simple JS for micro-interactions -->
+<script>
+        document.getElementById('loanPredictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+            const spinner = document.getElementById('loadingSpinner');
+
+            // Set Loading State
+            btnText.textContent = 'Analyzing Application...';
+            btnIcon.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            btn.classList.add('opacity-80', 'pointer-events-none');
+
+            // Simulate Network Request
+            setTimeout(() => {
+                // Reset State
+                btnText.textContent = 'Predict Loan Approval';
+                btnIcon.classList.remove('hidden');
+                spinner.classList.add('hidden');
+                btn.classList.remove('opacity-80', 'pointer-events-none');
+            }, 3000);
+        });
+    </script>
+
+
+</body></html>

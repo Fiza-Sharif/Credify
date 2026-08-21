@@ -1,0 +1,315 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Credify - Dashboard &amp; Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353534",
+                        "background": "#131313",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#574200",
+                        "on-tertiary": "#3e2e00",
+                        "surface-tint": "#e9c349",
+                        "on-secondary-fixed-variant": "#474646",
+                        "primary": "#f2ca50",
+                        "surface": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "secondary": "#c8c6c5",
+                        "outline-variant": "#4d4635",
+                        "on-primary-fixed-variant": "#574500",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-error": "#690005",
+                        "on-primary-container": "#554300",
+                        "on-surface-variant": "#d0c5af",
+                        "primary-container": "#d4af37",
+                        "primary-fixed": "#ffe088",
+                        "on-secondary": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#99907c",
+                        "on-secondary-container": "#bab8b7",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed": "#251a00",
+                        "on-primary-fixed": "#241a00",
+                        "inverse-primary": "#735c00",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#353534",
+                        "tertiary-fixed-dim": "#f0c03e",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-dim": "#131313",
+                        "tertiary": "#f9c845",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-container": "#4a4949",
+                        "tertiary-container": "#daad2a",
+                        "tertiary-fixed": "#ffdf95",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#3c2f00",
+                        "on-background": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "stack-lg": "48px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Geist"],
+                        "display-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "mono-data": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mono-data": ["14px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@600;700&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid #2a2a2a;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        .btn-primary {
+            background-color: #D4AF37;
+            color: #131313;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #F5C542;
+            box-shadow: 0px 4px 20px rgba(212, 175, 55, 0.3);
+            transform: scale(0.98);
+        }
+        .btn-glass {
+            background: transparent;
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .btn-glass:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopNavBar Component -->
+<nav class="bg-background/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant/30 shadow-[0px_4px_20px_rgba(212,175,55,0.05)]">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-stack-md">
+<a href="#" class="block w-32 h-auto">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmpoTVCqDFzk70IYZ_tzohogQZ3UMUoB1wfbb90h102vkg6miHtqXIAdUoEz4N4z-hyPeOT5iXT-ae6y8rnKRsceKFVLUsH9vzTa2ZOXYmosYFuv1rzL5xlEBkMZdQG_urDytqCkwrX-egZRky5gtEP9dioEajIRN-Li_KAzepaRpC7Z_QMBhRxWNDevXQkBuzcc3IP7w1vE7rb2ioxiYM-OW7iTMoyAI9soDi-4nWuu_pehGMXYVo" alt="Credify Premium Logo" class="w-full h-full object-contain">
+</a>
+<div class="hidden md:flex gap-stack-md ml-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md text-body-md py-4" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md text-body-md py-4" href="#">Predict</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md text-body-md py-4" href="#">How It Works</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md py-4" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="btn-primary px-6 py-2 rounded-lg font-body-md text-body-md hidden md:block">Get Started</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close up of a professional headshot of a mature executive in a tailored dark suit. High contrast lighting, luxury corporate aesthetic, dark background. Minimalist styling, sharp focus, capturing quiet confidence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi9IT4cYZqDosqYvE8VcZPzmRrjipfUj3N1caSPFRonyjeYp_1uMoPa-BHTzgVfUkrYutwSH6OX87l4_gADOXcQIDLy-gRlAHiuYEkmhVhBNtU0qde1uRUjvVjxRGhFfMaTTP0ebEa2O14f2veletG8mYO85pbphQwI7QmP3ZEbov_5UeQsA01Xfkt0vP5aXmH1ojCvfEzXIcF4KWNip1KG6FcVHx70HhViP4gyVsa3-nqt09IUyM1">
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-[120px] pb-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar / Profile Summary (Left Column) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Profile Card -->
+<div class="glass-panel rounded-xl p-stack-md flex flex-col items-center text-center glow-hover transition-all duration-300">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-primary/50 mb-stack-sm relative">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Close up of a professional headshot of a mature executive in a tailored dark suit. High contrast lighting, luxury corporate aesthetic, dark background. Minimalist styling, sharp focus, capturing quiet confidence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV69hPvY1I9fQjpASpcsCDMm12110ENDnSA9JhVOsfz4nxN8ApDBrkDO8U9t5hr9S_SCNSsKY70FxxvG3W_hZixWms0gjJouGmm9xRznKQWg7oO_IvPqP_eaUalR9BNfroAUMqVbvF6q2XWuV2arWbHH8CYL4uVTVeDrhbJ67T5bi0aXxq5-vJKOiLQcKv60KuRjwFA2SU0S4lWKNaBLxjjG1x1tbqHeyCkuR-5Jno_tO9yv4t37H4">
+<div class="absolute inset-0 bg-primary/10 rounded-full pointer-events-none"></div>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-1">Alexander Vance</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">a.vance@precisionwealth.com</p>
+<button class="btn-glass w-full py-3 rounded-lg font-body-md text-body-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                        Edit Profile
+                    </button>
+</div>
+<!-- Settings Links -->
+<div class="glass-panel rounded-xl p-stack-sm flex flex-col">
+<a class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface" href="#">
+<span class="material-symbols-outlined text-primary">manage_accounts</span>
+<span class="font-body-md text-body-md">Account Settings</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface" href="#">
+<span class="material-symbols-outlined text-primary">security</span>
+<span class="font-body-md text-body-md">Security &amp; Privacy</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface" href="#">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="font-body-md text-body-md">Notifications</span>
+</a>
+<div class="h-px w-full bg-outline-variant/30 my-2"></div>
+<a class="flex items-center gap-3 p-3 rounded-lg hover:bg-error-container/20 transition-colors duration-200 text-error" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Sign Out</span>
+</a>
+</div>
+</div>
+<!-- Dashboard Content (Right Column) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Stat 1 -->
+<div class="glass-panel rounded-xl p-stack-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-stack-sm">
+<h3 class="font-body-md text-body-md text-on-surface-variant">Total Predictions</h3>
+<span class="material-symbols-outlined text-primary opacity-70">analytics</span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface">1,248</div>
+<div class="mt-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">trending_up</span>
+<span class="font-mono-data text-mono-data text-primary">+12.5% this month</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="glass-panel rounded-xl p-stack-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-stack-sm">
+<h3 class="font-body-md text-body-md text-on-surface-variant">Approval Rate</h3>
+<span class="material-symbols-outlined text-primary opacity-70">check_circle</span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface">94.2%</div>
+<div class="mt-2 flex items-center gap-2">
+<span class="font-mono-data text-mono-data text-on-surface-variant">Top tier performer</span>
+</div>
+</div>
+</div>
+<!-- Prediction History -->
+<div class="glass-panel rounded-xl flex flex-col flex-grow">
+<div class="p-stack-md border-b border-outline-variant/30 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Prediction History</h2>
+<button class="text-primary hover:text-primary-fixed transition-colors text-sm font-label-sm uppercase tracking-wider">View All</button>
+</div>
+<div class="flex flex-col">
+<!-- List Item 1 -->
+<div class="p-stack-md border-b border-outline-variant/10 hover:bg-surface-container-high/50 transition-colors duration-200 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface mb-1">Project Alpha Risk Assessment</div>
+<div class="font-mono-data text-mono-data text-on-surface-variant">ID: PRD-8892 • Oct 24, 2024</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-primary/10 border border-primary/30 text-primary px-3 py-1 rounded-full font-label-sm text-label-sm uppercase">Approved</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="p-stack-md border-b border-outline-variant/10 hover:bg-surface-container-high/50 transition-colors duration-200 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface mb-1">Q4 Yield Projection</div>
+<div class="font-mono-data text-mono-data text-on-surface-variant">ID: PRD-8891 • Oct 22, 2024</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-primary/10 border border-primary/30 text-primary px-3 py-1 rounded-full font-label-sm text-label-sm uppercase">Approved</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="p-stack-md border-b border-outline-variant/10 hover:bg-surface-container-high/50 transition-colors duration-200 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface mb-1">Emerging Markets Analysis</div>
+<div class="font-mono-data text-mono-data text-on-surface-variant">ID: PRD-8885 • Oct 18, 2024</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-error-container/20 border border-error/30 text-error px-3 py-1 rounded-full font-label-sm text-label-sm uppercase">Rejected</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- List Item 4 -->
+<div class="p-stack-md hover:bg-surface-container-high/50 transition-colors duration-200 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+<div>
+<div class="font-body-lg text-body-lg text-on-surface mb-1">Tech Sector Volatility</div>
+<div class="font-mono-data text-mono-data text-on-surface-variant">ID: PRD-8880 • Oct 15, 2024</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-primary/10 border border-primary/30 text-primary px-3 py-1 rounded-full font-label-sm text-label-sm uppercase">Approved</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest w-full py-stack-lg border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2 flex flex-col gap-stack-sm">
+<div class="w-32 h-auto mb-stack-sm">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmpoTVCqDFzk70IYZ_tzohogQZ3UMUoB1wfbb90h102vkg6miHtqXIAdUoEz4N4z-hyPeOT5iXT-ae6y8rnKRsceKFVLUsH9vzTa2ZOXYmosYFuv1rzL5xlEBkMZdQG_urDytqCkwrX-egZRky5gtEP9dioEajIRN-Li_KAzepaRpC7Z_QMBhRxWNDevXQkBuzcc3IP7w1vE7rb2ioxiYM-OW7iTMoyAI9soDi-4nWuu_pehGMXYVo" alt="Credify Premium Logo" class="w-full h-full object-contain">
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-auto">© 2024 Credify AI. All rights reserved. Precision Wealth Management.</div>
+</div>
+<div class="col-span-1 flex flex-col gap-stack-sm">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Security</a>
+</div>
+<div class="col-span-1 flex flex-col gap-stack-sm">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Institutional</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Careers</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

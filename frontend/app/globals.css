@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #C49A24;
+  --color-primary-container: #d4af37;
+  --color-primary-fixed: #ffe088;
+  --color-primary-fixed-dim: #e9c349;
+  --color-on-primary: #3c2f00;
+
+  --color-secondary: #c8c6c5;
+  --color-tertiary: #f9c845;
+  --color-outline: #99907c;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+}
+
+:root {
+  /* Light Mode Color System */
+  --app-bg: #F4F1E8;
+  --nav-bg: rgba(244, 241, 232, 0.92);
+  --card-bg: #FFFFFF;
+  --card-elevated: #FAF8F2;
+  --card-sub-bg: #ECE8DC;
+  --footer-bg: #ECE8DC;
+  --card-border: #DDD8CA;
+  --text-main: #1A1A1A;
+  --text-sub: #5F5B52;
+  --text-muted: #8A867C;
+  --input-bg: #FAF8F2;
+  --input-border: #DDD8CA;
+  --input-text: #1A1A1A;
+  --gold-primary: #C49A24;
+  --gold-bright: #D4AF37;
+  --gold-hover: #B88A16;
+  --card-shadow: 0 4px 16px rgba(26, 26, 26, 0.04);
+  --card-shadow-hover: 0 8px 24px rgba(196, 154, 36, 0.1);
+}
+
+html.dark {
+  /* Dark Mode Color System */
+  --app-bg: #050505;
+  --nav-bg: rgba(19, 19, 19, 0.90);
+  --card-bg: #121212;
+  --card-elevated: #181818;
+  --card-sub-bg: #1c1b1b;
+  --footer-bg: #0e0e0e;
+  --card-border: #2A2A2A;
+  --text-main: #F5F5F0;
+  --text-sub: #D0C5AF;
+  --text-muted: #99907C;
+  --input-bg: #050505;
+  --input-border: #2A2A2A;
+  --input-text: #F5F5F0;
+  --gold-primary: #D4AF37;
+  --gold-bright: #F2CA50;
+  --gold-hover: #FFE088;
+  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 8px 24px rgba(212, 175, 55, 0.15);
+}
+
+body {
+  background-color: var(--app-bg);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Custom Luxury Form Controls with Subtle Focus Animations */
+.form-input-luxury {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 0.75rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background-color 0.35s ease;
+}
+
+.form-input-luxury:focus {
+  outline: none;
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 3px rgba(196, 154, 36, 0.18);
+  transform: translateY(-1px);
+}
+
+.form-select-luxury {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 0.75rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background-color 0.35s ease;
+}
+
+.form-select-luxury:focus {
+  outline: none;
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 3px rgba(196, 154, 36, 0.18);
+  transform: translateY(-1px);
+}
+
+.form-label-luxury {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-sub);
+  margin-bottom: 0.5rem;
+  transition: color 0.35s ease;
+}
+
+/* Keyframes for Subtle Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideUpFade {
+  animation: slideUpFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pageEnter {
+  animation: pageEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Accessibility: prefers-reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

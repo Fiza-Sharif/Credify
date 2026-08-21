@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <!-- Rich Gold Metallic Gradient -->
+    <linearGradient id="favGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE599" />
+      <stop offset="45%" stop-color="#F5C542" />
+      <stop offset="100%" stop-color="#C59B27" />
+    </linearGradient>
+    
+    <!-- Subtle Core Glow -->
+    <linearGradient id="favGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5C542" />
+      <stop offset="100%" stop-color="#D4AF37" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Background Container with Rounded Corners -->
+  <rect width="512" height="512" rx="112" fill="#050505" />
+  <rect x="8" y="8" width="496" height="496" rx="104" stroke="#2A2A2A" stroke-width="8" fill="none" />
+
+  <!-- Centered Bold Credify Shield Emblem -->
+  <g transform="translate(256 256) scale(7.5) translate(-22 -23)">
+    <!-- Outer Shield Diamond Ring -->
+    <path d="M 22 7 L 35 15 L 35 31 L 22 39 L 9 31 L 9 15 Z" 
+          stroke="url(#favGold)" 
+          stroke-width="3" 
+          fill="#131313" 
+          stroke-linejoin="round" />
+    
+    <!-- Interlocking Arc forming stylized C -->
+    <path d="M 27 16 C 18 16 15 21 15 23 C 15 25 18 30 27 30" 
+          stroke="url(#favGold)" 
+          stroke-width="3.5" 
+          stroke-linecap="round" 
+          fill="none" />
+    
+    <!-- Upward Growth Core Node -->
+    <circle cx="23" cy="23" r="3.2" fill="url(#favGlow)" />
+  </g>
+</svg>
