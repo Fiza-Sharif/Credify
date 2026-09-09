@@ -93,6 +93,47 @@ def health_check():
     }
 
 
+def generate_explanation(applicant: LoanApplicationRequest, is_approved: bool) -> str:
+    total_income = applicant.ApplicantIncome + applicant.CoapplicantIncome
+    credit_good = (applicant.Credit_History == 1.0)
+    loan_k = applicant.LoanAmount
+
+    if is_approved:
+        factors = []
+        if credit_good:
+            factors.append("a verified credit history (1.0)")
+        else:
+            factors.append("favorable application parameters")
+
+        if total_income > 0:
+            factors.append(f"a total household income of ${int(total_income):,}")
+
+        if applicant.CoapplicantIncome > 0:
+            factors.append("additional co-applicant income support")
+        elif applicant.Property_Area == "Semiurban":
+            factors.append("semi-urban property location")
+        elif applicant.Education == "Graduate":
+            factors.append("graduate education status")
+
+        if len(factors) >= 2:
+            factors_summary = f"{factors[0]} and {factors[1]}"
+        else:
+            factors_summary = factors[0]
+
+        return f"Approval was primarily driven by {factors_summary} relative to the requested loan of ${int(loan_k)}k."
+    else:
+        if not credit_good:
+            return f"The rejection was primarily affected by a missing or unestablished credit history (0.0). Establishing a positive repayment record before re-applying can significantly increase your approval chances."
+        else:
+            annual_est = total_income * 12
+            if total_income > 0 and (loan_k * 1000 / annual_est) > 2.5:
+                return f"The rejection was likely affected by a high requested loan amount (${int(loan_k)}k) relative to your combined income (${int(total_income):,}). Requesting a lower loan amount or adding a co-applicant with income may improve eligibility."
+            elif applicant.CoapplicantIncome == 0:
+                return f"The result was likely affected by single-applicant income limits for the requested ${int(loan_k)}k loan. Adding a co-applicant or requesting a smaller loan amount may help improve approval chances."
+            else:
+                return f"The result was likely affected by the combined risk profile of property area ({applicant.Property_Area}), loan term ({int(applicant.Loan_Amount_Term)} months), and debt ratio. Reducing the requested loan amount may help increase eligibility."
+
+
 @app.post("/predict")
 def predict_loan_approval(applicant: LoanApplicationRequest):
     if pipeline is None:
@@ -114,11 +155,13 @@ def predict_loan_approval(applicant: LoanApplicationRequest):
         confidence_pct = round(float(probabilities[prediction_val]) * 100, 1)
 
         is_approved = (prediction_val == 1)
+        explanation = generate_explanation(applicant, is_approved)
 
         return {
             "prediction": "Approved" if is_approved else "Rejected",
             "status": "approved" if is_approved else "rejected",
             "confidence": confidence_pct,
+            "explanation": explanation,
             "details": {
                 "applicant_income": applicant.ApplicantIncome,
                 "coapplicant_income": applicant.CoapplicantIncome,
@@ -138,3 +181,4 @@ def predict_loan_approval(applicant: LoanApplicationRequest):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Error processing loan prediction: {str(e)}"
         )
+

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { AuthProvider } from "./context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Credify - Precision AI Loan Approval Predictor",
@@ -42,9 +43,11 @@ export default function RootLayout({
       </head>
       <body className="bg-[var(--app-bg)] text-[var(--text-main)] min-h-screen flex flex-col antialiased transition-colors duration-300">
         <ThemeProvider>
-          <Navbar />
-          <div className="pt-20 flex-grow">{children}</div>
-          <Footer />
+          <AuthProvider>
+            <Navbar />
+            <div className="pt-20 flex-grow">{children}</div>
+            <Footer />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

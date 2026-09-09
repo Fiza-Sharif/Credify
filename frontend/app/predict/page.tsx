@@ -19,6 +19,49 @@ export interface PredictionRecord {
   prediction: "Approved" | "Rejected";
   status: "approved" | "rejected";
   confidence?: number;
+  explanation?: string;
+}
+
+export function generateExplanation(record: {
+  status: "approved" | "rejected";
+  income: number;
+  coapplicant_income: number;
+  loan_amount: number;
+  term: number;
+  credit_history: number;
+  property_area: string;
+  education?: string;
+  explanation?: string;
+}): string {
+  if (record.explanation) return record.explanation;
+
+  const totalIncome = record.income + record.coapplicant_income;
+  const creditGood = record.credit_history === 1;
+  const isApproved = record.status === "approved";
+
+  if (isApproved) {
+    const factors: string[] = [];
+    if (creditGood) factors.push("a verified credit history (1.0)");
+    if (totalIncome > 0) factors.push(`a total household income of $${totalIncome.toLocaleString()}`);
+    if (record.coapplicant_income > 0) factors.push("co-applicant income support");
+    else if (record.property_area === "Semiurban") factors.push("semi-urban property location");
+
+    const factorText = factors.length >= 2 ? `${factors[0]} and ${factors[1]}` : (factors[0] || "favorable application metrics");
+    return `Approval was primarily driven by ${factorText} relative to the requested loan of $${record.loan_amount}k.`;
+  } else {
+    if (!creditGood) {
+      return `The rejection was primarily affected by a missing or unestablished credit history (0.0). Establishing a positive repayment record before re-applying can significantly increase your approval chances.`;
+    } else {
+      const annualEst = totalIncome * 12;
+      if (totalIncome > 0 && (record.loan_amount * 1000) / annualEst > 2.5) {
+        return `The rejection was likely affected by a high requested loan amount ($${record.loan_amount}k) relative to your combined income ($${totalIncome.toLocaleString()}). Requesting a lower loan amount or adding a co-applicant with income may improve eligibility.`;
+      } else if (record.coapplicant_income === 0) {
+        return `The result was likely affected by single-applicant income limits for the requested $${record.loan_amount}k loan. Adding a co-applicant or requesting a smaller loan amount may help improve approval chances.`;
+      } else {
+        return `The result was likely affected by the combined risk profile of property area (${record.property_area}), loan term (${record.term} months), and debt ratio. Reducing the requested loan amount may help increase eligibility.`;
+      }
+    }
+  }
 }
 
 export default function PredictPage() {
@@ -137,6 +180,7 @@ export default function PredictPage() {
         prediction: resData.prediction,
         status: resData.status,
         confidence: resData.confidence,
+        explanation: resData.explanation,
       };
 
       setResult(newRecord);
@@ -244,6 +288,35 @@ export default function PredictPage() {
                   </span>
                 </div>
               )}
+            </div>
+
+            {/* 1–2 Line Dynamic Prediction Explanation Box */}
+            <div
+              className={`my-6 p-4.5 rounded-xl border text-sm leading-relaxed relative z-10 flex items-start gap-3.5 transition-all duration-300 ${
+                result.status === "approved"
+                  ? "bg-[#C49A24]/10 border-[#C49A24]/30 text-[var(--text-main)]"
+                  : "bg-[#93000a]/10 border-[#93000a]/30 text-[var(--text-main)]"
+              }`}
+            >
+              <span
+                className={`material-symbols-outlined text-xl mt-0.5 shrink-0 ${
+                  result.status === "approved"
+                    ? "text-[#C49A24] dark:text-[#f2ca50]"
+                    : "text-[#93000a] dark:text-[#ffb4ab]"
+                }`}
+              >
+                {result.status === "approved" ? "verified" : "lightbulb"}
+              </span>
+              <div>
+                <span className="font-semibold block text-xs uppercase tracking-wider text-[var(--text-sub)] mb-1">
+                  {result.status === "approved"
+                    ? "Key Approval Factors"
+                    : "Likely Risk Factors & Recommendation"}
+                </span>
+                <p className="text-sm font-medium text-[var(--text-main)]">
+                  {generateExplanation(result)}
+                </p>
+              </div>
             </div>
 
             {/* Applicant Financial Metrics Grid */}
